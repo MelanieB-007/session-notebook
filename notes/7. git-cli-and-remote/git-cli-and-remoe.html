@@ -1,0 +1,312 @@
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Git CLI &amp; remote</title>
+     
+    <!-- Theme CSS laden -->
+    <link
+      rel="stylesheet"
+      href="/web-curriculum/assets/css/style.css?v=67261d04a37b9cc2aeb2482d3d2e133abfa7faa5"
+    />
+    <style>
+      main {
+        padding: 1em;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      li {
+        margin-left: 1.2em;
+      }
+      pre {
+        margin-bottom: 1.5em;
+      }
+      code,
+      pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        overflow-wrap: anywhere;
+        display: block;
+        position: relative;
+        padding: 1em 4em 1em 1em;
+      }
+      code[class*="language-plaintext"] {
+        display: inline-block;
+        padding: 3px;
+        background-color: #eeeeee;
+        border-radius: 6px;
+      }
+      button {
+        cursor: pointer;
+        font-size: 0.8em;
+        border-radius: 6px;
+        border: 1px solid black;
+        position: absolute;
+        top: 12px;
+        right: 12px;
+      }
+      h2 {
+        margin-top: 0.8em;
+        margin-bottom: 0.8em;
+      }
+      img {
+        width: 100%;
+      }
+      td {
+        border: 1px solid #ddddde;
+        padding: 2px;
+      }
+      table {
+        margin-bottom: 1em;
+      }
+      .download {
+        display: inline-block;
+        padding: 0.5em 1em;
+        background-color: #4f46e5;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.2s;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <!-- Hauptinhalt -->
+      <h1 id="git-cli--remote">Git CLI &amp; remote</h1>
+
+<h2 id="learning-objectives">Learning Objectives</h2>
+
+<ul>
+  <li>using version control locally to create repositories and commits</li>
+  <li>understanding different states of files</li>
+  <li>synchronizing local repositories with remote repositories</li>
+</ul>
+
+<hr />
+
+<h2 id="git-cli">Git CLI</h2>
+
+<p>You can create git repositories and commits locally. You can also synchronize your local repository
+with a <strong>remote</strong> repository (i.e. on GitHub).</p>
+
+<h3 id="creating-local-repositories">Creating local repositories</h3>
+
+<p>To turn a folder into a git repository you need the following git command:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>path/to/my/folder
+git init
+</code></pre></div></div>
+
+<blockquote>
+  <p>❗️ Do not initialize a git repository inside another git repository!<br />
+To check if a folder has already been initialized you can run the following git command</p>
+
+  <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git status
+</code></pre></div>  </div>
+
+  <p>Not a git repo:</p>
+
+  <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatal: not a git repository <span class="o">(</span>or any of the parent directories<span class="o">)</span>: .git
+</code></pre></div>  </div>
+
+  <p>A git repo:</p>
+
+  <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>On branch main
+nothing to commit, working tree clean
+</code></pre></div>  </div>
+</blockquote>
+
+<hr />
+
+<h2 id="states-of-files">States of files</h2>
+
+<p>On GitHub, we can create, modify and delete files, the same can be done via the terminal. To
+understand how this works, we have to know about the different states a file can have.</p>
+
+<h3 id="untracked-files">Untracked files</h3>
+
+<p>The file has not been added to git.</p>
+
+<h3 id="tracked-files">Tracked files</h3>
+
+<p>Tracked files can be in different states:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>state</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>modified</td>
+      <td>Has changes since the last commit</td>
+    </tr>
+    <tr>
+      <td>staged</td>
+      <td>Is included in the next commit</td>
+    </tr>
+    <tr>
+      <td>committed</td>
+      <td>All changes have been saved in git</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="committing-in-a-local-repository">Committing in a local repository</h2>
+
+<p>We recommend executing the following git commands for every completed task:</p>
+
+<blockquote>
+  <p>💡 Hint: Commits help track your progress.<br />
+Commit early, commit often.<br />
+Make sure, that your code works as expected.</p>
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th>Git command</th>
+      <th>Git task</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">git status</code></td>
+      <td>List all files that have changed and their state</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">git add &lt;filename&gt;</code></td>
+      <td>Add a file to the stage</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">git commit -m "add foo"</code></td>
+      <td>Create a commit including all staged files</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">git log --oneline</code></td>
+      <td>Show the commit history</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><img src="./untracked-to-committed.png" alt="untracked to committed" width="400" />
+<img src="./modified-to-committed.png" alt="modified to committed" width="400" /></p>
+
+<hr />
+
+<h2 id="using-commits-as-backups">Using commits as backups</h2>
+
+<p>You can always return to the last committed state of the entire project:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git restore <span class="nb">.</span>
+</code></pre></div></div>
+
+<p>You can also restore individual files:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git restore &lt;filename&gt;
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="connecting-to-a-remote-repository">Connecting to a remote repository</h2>
+
+<p>This enables teams to work on the same remote repository and clone it locally. The remote repository
+also serves as a backup.</p>
+
+<h3 id="connecting-your-local-repository-to-a-new-remote-repository">Connecting your local repository to a new remote repository</h3>
+
+<p>The first thing you need to do is create a new empty remote repository on GitHub. You will then see
+some hints e.g. “…or push an existing repository from the command line”. <strong>Copy the commands from
+GitHub</strong> and execute them in your local project folder.</p>
+
+<p><strong>Example:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git remote add origin git@github.com:GitHubUsername/repository-name.git
+git branch -M main
+git push -u origin main
+</code></pre></div></div>
+
+<h3 id="cloning-a-remote-repository">Cloning a remote repository</h3>
+
+<p>You can create a copy of the remote repository on your local machine with the following command:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone &lt;url&gt;
+</code></pre></div></div>
+
+<blockquote>
+  <p>💡 You can find the url of remote repositories on GitHub on the repository page. Please use the
+SSH url.</p>
+</blockquote>
+
+<p><img src="./clone-ssh.png" alt="Clone SSH" width="400" /></p>
+
+<h3 id="synchronizing-local--remote-repositories">Synchronizing local &amp; remote repositories</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Git command</th>
+      <th>Git task</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">git push</code></td>
+      <td>Upload content to the remote repository</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">git pull</code></td>
+      <td>Download content from the remote repository</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="resources">Resources</h2>
+
+<ul>
+  <li><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh">Connect with SSH Docs on GitHub</a></li>
+  <li><a href="https://git-scm.com/">Git SCM</a></li>
+  <li><a href="https://git-scm.com/book/en/v2">Git book</a></li>
+  <li><a href="https://training.github.com/downloads/github-git-cheat-sheet/">Git Cheatsheet</a></li>
+</ul>
+
+    </main>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll("a[href^='http']").forEach(function (link) {
+          // Nur externe Links, nicht gleiche Domain
+          if (!link.href.includes(window.location.hostname)) {
+            link.setAttribute("target", "_blank");
+            link.setAttribute("rel", "noopener noreferrer");
+          }
+        });
+
+        document
+          .querySelectorAll("div[class*='language-bash']")
+          .forEach((div) => {
+            const code = div.querySelector("code");
+            const btn = document.createElement("button");
+            btn.textContent = "copy";
+            btn.addEventListener("click", (event) => {
+              navigator.clipboard.writeText(code.firstChild.data);
+              event.target.textContent = "copied!";
+              setTimeout(() => {
+                event.target.textContent = "copy";
+              }, 2000);
+            });
+            code.append(btn);
+          });
+      });
+    </script>
+  </body>
+</html>
+
