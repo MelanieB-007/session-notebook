@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shell Basics</title>
+     
+    <!-- Theme CSS laden -->
+    <link
+      rel="stylesheet"
+      href="/web-curriculum/assets/css/style.css?v=67261d04a37b9cc2aeb2482d3d2e133abfa7faa5"
+    />
+    <style>
+      main {
+        padding: 1em;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      li {
+        margin-left: 1.2em;
+      }
+      pre {
+        margin-bottom: 1.5em;
+      }
+      code,
+      pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        overflow-wrap: anywhere;
+        display: block;
+        position: relative;
+        padding: 1em 4em 1em 1em;
+      }
+      code[class*="language-plaintext"] {
+        display: inline-block;
+        padding: 3px;
+        background-color: #eeeeee;
+        border-radius: 6px;
+      }
+      button {
+        cursor: pointer;
+        font-size: 0.8em;
+        border-radius: 6px;
+        border: 1px solid black;
+        position: absolute;
+        top: 12px;
+        right: 12px;
+      }
+      h2 {
+        margin-top: 0.8em;
+        margin-bottom: 0.8em;
+      }
+      img {
+        width: 100%;
+      }
+      td {
+        border: 1px solid #ddddde;
+        padding: 2px;
+      }
+      table {
+        margin-bottom: 1em;
+      }
+      .download {
+        display: inline-block;
+        padding: 0.5em 1em;
+        background-color: #4f46e5;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.2s;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <!-- Hauptinhalt -->
+      <h1 id="shell-basics">Shell Basics</h1>
+
+<h2 id="learning-objectives">Learning Objectives</h2>
+
+<ul>
+  <li>learning what the terminal and the shell are</li>
+  <li>learning to navigate the file system using the shell and the terminal</li>
+  <li>learning to create, rename, remove and move files and folders in the filesystem</li>
+</ul>
+
+<hr />
+
+<h2 id="shell-and-terminal">Shell and Terminal</h2>
+
+<p>You are probably used to using GUIs
+(<a href="https://en.wikipedia.org/wiki/Graphical_user_interface">Graphical User Interfaces</a>) to interact
+with computers.</p>
+
+<p>Often times developers interact with computers using CLIs (Command Line Interfaces) which are text
+based user interfaces. That means that you type commands to interact with the computer (create /
+move / delete / edit files, install software, change system settings…).</p>
+
+<p>This has the following reasons / advantages:</p>
+
+<ul>
+  <li>Many tools don’t have a GUI and can only be used as a CLI.</li>
+  <li>You can write scripts (which consist of a number of commands) to automate processes and repetitive
+tasks and ensure they are being run exactly the same way every time they are executed.</li>
+</ul>
+
+<p>On macOS we are using zsh (z shell) as the command interpreter.</p>
+
+<p>By default it is run within the Terminal app. For this course we’ll use iTerm and Visual Studio Code
+as alternative terminal emulators.</p>
+
+<ul>
+  <li>A shell (like zsh) is the command interpreter that runs and executes commands on your computer and
+outputs results.</li>
+  <li>A terminal (like Terminal, iTerm, Visual Studio Code) is a text input and output environment
+(emulating a <a href="https://en.wikipedia.org/wiki/Computer_terminal">hardware computer terminal</a>) that
+sends commands to the shell and displays its output.</li>
+</ul>
+
+<h3 id="basic-shell-commands">Basic Shell commands</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>command</th>
+      <th>functionality</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ls</code></td>
+      <td>list the content of the current directory</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cd &lt;foldername&gt;</code></td>
+      <td>change directory into a folder</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cd ..</code></td>
+      <td>change into the parent folder</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cd ~</code></td>
+      <td>change into your home directory</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pwd</code></td>
+      <td>print the current directory path</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">touch example.md</code></td>
+      <td>create a file called “example.md”</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">mkdir newFolder</code></td>
+      <td>create a folder called “newFolder”</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">mv &lt;oldname&gt; &lt;newname&gt;</code></td>
+      <td>move or rename a file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">rm &lt;filename&gt;</code></td>
+      <td>delete a file permanently (there is no trash bin to recover files!)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">open .</code></td>
+      <td>open the current folder in the finder</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cat &lt;filename&gt;</code></td>
+      <td>prints the content of a specific file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">curl &lt;url&gt;</code></td>
+      <td>prints the received content from the specified url. (try <code class="language-plaintext highlighter-rouge">curl ipinfo.io</code>)</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>💡 There are a lot of commands for any sort of action you want to perform check out
+<a href="https://github.com/RehanSaeed/Bash-Cheat-Sheet">this cheat sheet</a> to look up important commands.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="resources">Resources</h2>
+
+<ul>
+  <li><a href="https://mrkaluzny.com/blog/terminal-101-getting-started-with-terminal/">Terminal basics</a></li>
+  <li><a href="https://github.com/0nn0/terminal-mac-cheatsheet#english-version">Command line cheat sheet</a></li>
+</ul>
+
+    </main>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll("a[href^='http']").forEach(function (link) {
+          // Nur externe Links, nicht gleiche Domain
+          if (!link.href.includes(window.location.hostname)) {
+            link.setAttribute("target", "_blank");
+            link.setAttribute("rel", "noopener noreferrer");
+          }
+        });
+
+        document
+          .querySelectorAll("div[class*='language-bash']")
+          .forEach((div) => {
+            const code = div.querySelector("code");
+            const btn = document.createElement("button");
+            btn.textContent = "copy";
+            btn.addEventListener("click", (event) => {
+              navigator.clipboard.writeText(code.firstChild.data);
+              event.target.textContent = "copied!";
+              setTimeout(() => {
+                event.target.textContent = "copy";
+              }, 2000);
+            });
+            code.append(btn);
+          });
+      });
+    </script>
+  </body>
+</html>
+
