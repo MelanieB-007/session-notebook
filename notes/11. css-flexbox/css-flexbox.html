@@ -1,0 +1,235 @@
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Flexbox</title>
+     
+    <!-- Theme CSS laden -->
+    <link
+      rel="stylesheet"
+      href="/web-curriculum/assets/css/style.css?v=67261d04a37b9cc2aeb2482d3d2e133abfa7faa5"
+    />
+    <style>
+      main {
+        padding: 1em;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      li {
+        margin-left: 1.2em;
+      }
+      pre {
+        margin-bottom: 1.5em;
+      }
+      code,
+      pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        overflow-wrap: anywhere;
+        display: block;
+        position: relative;
+        padding: 1em 4em 1em 1em;
+      }
+      code[class*="language-plaintext"] {
+        display: inline-block;
+        padding: 3px;
+        background-color: #eeeeee;
+        border-radius: 6px;
+      }
+      button {
+        cursor: pointer;
+        font-size: 0.8em;
+        border-radius: 6px;
+        border: 1px solid black;
+        position: absolute;
+        top: 12px;
+        right: 12px;
+      }
+      h2 {
+        margin-top: 0.8em;
+        margin-bottom: 0.8em;
+      }
+      img {
+        width: 100%;
+      }
+      td {
+        border: 1px solid #ddddde;
+        padding: 2px;
+      }
+      table {
+        margin-bottom: 1em;
+      }
+      .download {
+        display: inline-block;
+        padding: 0.5em 1em;
+        background-color: #4f46e5;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.2s;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <!-- Hauptinhalt -->
+      <h1 id="css-flexbox">CSS Flexbox</h1>
+
+<h2 id="learning-objectives">Learning Objectives</h2>
+
+<ul>
+  <li>understanding the purpose of flexbox:
+    <ul>
+      <li>letting items fill out the possible space in their container</li>
+      <li>distributing elements for different screen sizes</li>
+      <li>making the website more responsive with flexbox</li>
+    </ul>
+  </li>
+  <li>understanding the most important flexbox properties</li>
+  <li>knowing the difference between <strong>main-axis</strong> and <strong>cross-axis</strong></li>
+</ul>
+
+<hr />
+
+<h2 id="flexbox">Flexbox</h2>
+
+<p>Flexbox is a powerful CSS tool to layout your HTML elements, especially when you want to align
+elements horizontally. It is defined on a container element, containing multiple elements whose
+position will be determined by the flexbox rules. You define it as follows:</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.container-element</span> <span class="p">{</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Flexbox does the following:</p>
+
+<ul>
+  <li>All child elements will be displayed next to each other along the main axis, the horizontal axis
+by default. The perpendicular axis is called cross axis.</li>
+  <li>If the width of all child elements exceeds the container’s width, the child elements will be
+shrunk such that they all fit into the available space.</li>
+</ul>
+
+<p>This behavior can be modified to achieve some very useful layouts. The most important flex
+properties are listed in the following table.</p>
+
+<hr />
+
+<h2 id="important-flex-properties">Important Flex Properties</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>property</th>
+      <th>effect</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content">justify-content</a></td>
+      <td>Defines the positioning of elements along the main axis. Useful values: <code class="language-plaintext highlighter-rouge">flex-start</code>, <code class="language-plaintext highlighter-rouge">flex-end</code>, <code class="language-plaintext highlighter-rouge">center</code> , <code class="language-plaintext highlighter-rouge">space-between</code>, <code class="language-plaintext highlighter-rouge">space-evenly</code></td>
+    </tr>
+    <tr>
+      <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-items">align-items</a></td>
+      <td>Defines the positioning of elements along the cross axis. Useful values: <code class="language-plaintext highlighter-rouge">flex-start</code>, <code class="language-plaintext highlighter-rouge">flex-end</code>, <code class="language-plaintext highlighter-rouge">center</code></td>
+    </tr>
+    <tr>
+      <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/gap">gap</a></td>
+      <td>Defines the minimum spacing between elements.</td>
+    </tr>
+    <tr>
+      <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction">flex-direction</a></td>
+      <td>Sets the direction of the main axis. Useful values: <code class="language-plaintext highlighter-rouge">row</code>, <code class="language-plaintext highlighter-rouge">column</code></td>
+    </tr>
+    <tr>
+      <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap">flex-wrap</a></td>
+      <td>Modifies how elements can wrap into another row instead of being squashed into one row. Useful values: <code class="language-plaintext highlighter-rouge">wrap</code>, <code class="language-plaintext highlighter-rouge">no-wrap</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>💡 <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">This very detailed cheatsheet</a>
+includes everything you will ever need when working with flexbox.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="flex-direction">Flex-direction</h2>
+
+<p>This very fundamental property lets you define which axis should act as main axis. In this picture
+you can see its effect.</p>
+
+<p><img src="./flex-direction.png" alt="flex-direction" /></p>
+
+<p>As you can see it changes the layout completely. Also notice, that the property <code class="language-plaintext highlighter-rouge">align-items</code>, which
+defines the positioning on the cross axis, also changes with the definition of the flex-direction.</p>
+
+<hr />
+
+<h2 id="flex-wrap">Flex-wrap</h2>
+
+<p>This property is very useful for creating responsive layouts. With the property set to
+<code class="language-plaintext highlighter-rouge">flex-wrap: wrap</code> the elements flow into the next row when they wouldn’t fit into the current row.
+Depending on the screen width, the content can align itself, as shown in the following example.</p>
+
+<p><img src="./flex-wrap.png" alt="flex-wrap" /></p>
+
+<hr />
+
+<h3 id="css-grid-layout">CSS Grid Layout</h3>
+
+<p>CSS Grid is another powerful tool to layout your HTML elements. While flexbox excels at laying out
+elements in one dimension (if you ignore wrapped items), CSS Grid is used to layout elements in two dimensions.</p>
+
+<blockquote>
+  <p>📑 Learn more about <a href="/web-curriculum/sessions/css-flexbox/assets/css-grid.html"><strong>CSS Grid Layout</strong> in the document we prepared</a>.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="resources">Resources</h2>
+
+<ul>
+  <li><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">Flexbox Cheat Sheet</a></li>
+  <li><a href="https://www.joshwcomeau.com/css/interactive-guide-to-flexbox/">An Interactive Guide to Flexbox by Josh W. Comeau</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox">MDN web docs: Flexbox</a></li>
+  <li><a href="https://cssbattle.dev/">CSS Battle</a></li>
+  <li><a href="/web-curriculum/sessions/css-flexbox/assets/css-grid.html">📑 CSS Grid Layout document</a></li>
+  <li><a href="https://the-echoplex.net/flexyboxes/">Flexbox playground</a></li>
+</ul>
+
+    </main>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll("a[href^='http']").forEach(function (link) {
+          // Nur externe Links, nicht gleiche Domain
+          if (!link.href.includes(window.location.hostname)) {
+            link.setAttribute("target", "_blank");
+            link.setAttribute("rel", "noopener noreferrer");
+          }
+        });
+
+        document
+          .querySelectorAll("div[class*='language-bash']")
+          .forEach((div) => {
+            const code = div.querySelector("code");
+            const btn = document.createElement("button");
+            btn.textContent = "copy";
+            btn.addEventListener("click", (event) => {
+              navigator.clipboard.writeText(code.firstChild.data);
+              event.target.textContent = "copied!";
+              setTimeout(() => {
+                event.target.textContent = "copy";
+              }, 2000);
+            });
+            code.append(btn);
+          });
+      });
+    </script>
+  </body>
+</html>
+
