@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Positioning</title>
+     
+    <!-- Theme CSS laden -->
+    <link
+      rel="stylesheet"
+      href="/web-curriculum/assets/css/style.css?v=67261d04a37b9cc2aeb2482d3d2e133abfa7faa5"
+    />
+    <style>
+      main {
+        padding: 1em;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      li {
+        margin-left: 1.2em;
+      }
+      pre {
+        margin-bottom: 1.5em;
+      }
+      code,
+      pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        overflow-wrap: anywhere;
+        display: block;
+        position: relative;
+        padding: 1em 4em 1em 1em;
+      }
+      code[class*="language-plaintext"] {
+        display: inline-block;
+        padding: 3px;
+        background-color: #eeeeee;
+        border-radius: 6px;
+      }
+      button {
+        cursor: pointer;
+        font-size: 0.8em;
+        border-radius: 6px;
+        border: 1px solid black;
+        position: absolute;
+        top: 12px;
+        right: 12px;
+      }
+      h2 {
+        margin-top: 0.8em;
+        margin-bottom: 0.8em;
+      }
+      img {
+        width: 100%;
+      }
+      td {
+        border: 1px solid #ddddde;
+        padding: 2px;
+      }
+      table {
+        margin-bottom: 1em;
+      }
+      .download {
+        display: inline-block;
+        padding: 0.5em 1em;
+        background-color: #4f46e5;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.2s;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <!-- Hauptinhalt -->
+      <h1 id="css-positioning">CSS Positioning</h1>
+
+<h2 id="learning-objectives">Learning Objectives</h2>
+
+<ul>
+  <li>using the different types of positioning</li>
+  <li>knowing the CSS properties to define a position</li>
+  <li>understanding the basics of z-index</li>
+</ul>
+
+<hr />
+
+<img src="./image.png">
+
+<h2 id="positioning">Positioning</h2>
+
+<p>The position property comes in handy if you want to place an HTML element manually. There are 5
+different values to define the position:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">position: static</code></td>
+      <td>The position of the element is determined by the document flow (default)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">position: relative</code></td>
+      <td>Position the element relative to where the element would be placed normally</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">position: absolute</code></td>
+      <td>Position the element absolutely inside the <strong>nearest non-static ancestor element</strong></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">position: fixed</code></td>
+      <td>Position the element on a fixed position on the screen.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">position: sticky</code></td>
+      <td>The element is placed normally in the document flow, but keeps an offset relative to its nearest scrolling ancestor</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The position is then specified by the four position properties <code class="language-plaintext highlighter-rouge">top</code>, <code class="language-plaintext highlighter-rouge">bottom</code>, <code class="language-plaintext highlighter-rouge">right</code>, <code class="language-plaintext highlighter-rouge">left</code>.
+These work differently depending on the positioning method.</p>
+
+<hr />
+
+<h2 id="position-static"><code class="language-plaintext highlighter-rouge">position: static</code></h2>
+
+<p>Elements are positioned according to the normal document flow. The properties <code class="language-plaintext highlighter-rouge">top</code>, <code class="language-plaintext highlighter-rouge">bottom</code>,
+<code class="language-plaintext highlighter-rouge">right</code>, <code class="language-plaintext highlighter-rouge">left</code> have no effect. This is the default value.</p>
+
+<hr />
+
+<h2 id="position-relative"><code class="language-plaintext highlighter-rouge">position: relative</code></h2>
+
+<p>Elements are positioned according to the normal document flow and then displaced by the <code class="language-plaintext highlighter-rouge">top</code>,
+<code class="language-plaintext highlighter-rouge">bottom</code>, <code class="language-plaintext highlighter-rouge">right</code>, <code class="language-plaintext highlighter-rouge">left</code> properties. This method is also used to set the reference frame for an
+absolutely positioned child element. By doing so, the child element will be placed absolutely inside
+this element.</p>
+
+<p><img src="/web-curriculum/sessions/css-positioning/assets/position-relative.png" alt="example for position relative" /></p>
+
+<h2 id="position-absolute"><code class="language-plaintext highlighter-rouge">position: absolute</code></h2>
+
+<p>Elements are removed from the normal document flow and no space is created for them - so they leave
+no gap in the page. With position absolute you place an element (with the <code class="language-plaintext highlighter-rouge">top</code>, <code class="language-plaintext highlighter-rouge">bottom</code>, <code class="language-plaintext highlighter-rouge">right</code>,
+<code class="language-plaintext highlighter-rouge">left</code> properties) relative to a reference frame. The reference frame is the view-box of the closest
+ancestor element that does not have <code class="language-plaintext highlighter-rouge">position: static</code> (default).</p>
+
+<p>In the picture below you can see two examples.</p>
+
+<p>In the first, no non-static ancestor element exists, therefore the reference frame falls back to the
+page.</p>
+
+<p>In the second example, the element is inside another element with <code class="language-plaintext highlighter-rouge">position: relative</code>. Therefore,
+the element is placed absolutely towards this element and not the entire page.</p>
+
+<p><img src="/web-curriculum/sessions/css-positioning/assets/position-absolute.png" alt="example for position absolute" /></p>
+
+<hr />
+
+<h2 id="position-fixed"><code class="language-plaintext highlighter-rouge">position: fixed</code></h2>
+
+<p>Elements are removed from the normal document flow and no space is created for them - so they leave
+no gap in the page. An element with position fixed is not influenced by scrolling and therefore
+stays at the specified position. This is often used for navigation bars or “back to top” buttons.</p>
+
+<p><img src="/web-curriculum/sessions/css-positioning/assets/position-fixed.png" alt="example for position absolute" /></p>
+
+<hr />
+
+<h2 id="position-sticky"><code class="language-plaintext highlighter-rouge">position: sticky</code></h2>
+
+<p>This is an unusual but very nifty positioning method. The element is not affected by the positioning
+until it comes near the border of its scrolling container (normally the page itself). When the user
+continues scrolling, a specified offset is enforced. The element sticks to this offset and appears
+like a fixed element.</p>
+
+<p><img src="/web-curriculum/sessions/css-positioning/assets/position-sticky.png" alt="example for position absolute" /></p>
+
+<hr />
+
+<h2 id="z-index"><code class="language-plaintext highlighter-rouge">z-index</code></h2>
+
+<p>The z-index defines the stacking order of html elements. Elements with a higher stacking order
+appear on top if they overlap with other elements. The z-index can be an integer number (negative
+numbers are possible) or it can have the default value <code class="language-plaintext highlighter-rouge">auto</code> which sets the stack order equal to
+its parents. The z-index only effects positioned elements - that is elements with a non-static
+position value.</p>
+
+<hr />
+
+<h2 id="resources">Resources</h2>
+
+<ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/position">MDN web docs: position</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Positioning">MDN web docs: Using positioning</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/z-index">MDN web docs: z-index</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/Adding_z-index">MDN web docs: Using z-index</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context">MDN web docs: Stacking context</a></li>
+  <li><a href="https://www.joshwcomeau.com/css/stacking-contexts/"><code class="language-plaintext highlighter-rouge">z-index</code> and stacking context by Josh W. Comeau</a></li>
+</ul>
+
+    </main>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll("a[href^='http']").forEach(function (link) {
+          // Nur externe Links, nicht gleiche Domain
+          if (!link.href.includes(window.location.hostname)) {
+            link.setAttribute("target", "_blank");
+            link.setAttribute("rel", "noopener noreferrer");
+          }
+        });
+
+        document
+          .querySelectorAll("div[class*='language-bash']")
+          .forEach((div) => {
+            const code = div.querySelector("code");
+            const btn = document.createElement("button");
+            btn.textContent = "copy";
+            btn.addEventListener("click", (event) => {
+              navigator.clipboard.writeText(code.firstChild.data);
+              event.target.textContent = "copied!";
+              setTimeout(() => {
+                event.target.textContent = "copy";
+              }, 2000);
+            });
+            code.append(btn);
+          });
+      });
+    </script>
+  </body>
+</html>
+
