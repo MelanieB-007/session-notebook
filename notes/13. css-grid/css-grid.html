@@ -1,0 +1,291 @@
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Grid Layout</title>
+     
+    <!-- Theme CSS laden -->
+    <link
+      rel="stylesheet"
+      href="/web-curriculum/assets/css/style.css?v=67261d04a37b9cc2aeb2482d3d2e133abfa7faa5"
+    />
+    <style>
+      main {
+        padding: 1em;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      li {
+        margin-left: 1.2em;
+      }
+      pre {
+        margin-bottom: 1.5em;
+      }
+      code,
+      pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        overflow-wrap: anywhere;
+        display: block;
+        position: relative;
+        padding: 1em 4em 1em 1em;
+      }
+      code[class*="language-plaintext"] {
+        display: inline-block;
+        padding: 3px;
+        background-color: #eeeeee;
+        border-radius: 6px;
+      }
+      button {
+        cursor: pointer;
+        font-size: 0.8em;
+        border-radius: 6px;
+        border: 1px solid black;
+        position: absolute;
+        top: 12px;
+        right: 12px;
+      }
+      h2 {
+        margin-top: 0.8em;
+        margin-bottom: 0.8em;
+      }
+      img {
+        width: 100%;
+      }
+      td {
+        border: 1px solid #ddddde;
+        padding: 2px;
+      }
+      table {
+        margin-bottom: 1em;
+      }
+      .download {
+        display: inline-block;
+        padding: 0.5em 1em;
+        background-color: #4f46e5;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.2s;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <!-- Hauptinhalt -->
+      <h1 id="css-grid-layout">CSS Grid Layout</h1>
+
+<h2 id="learning-objectives">Learning Objectives</h2>
+
+<ul>
+  <li>using CSS Grid to layout Webpages</li>
+  <li>positioning elements in Grid cells</li>
+  <li>aligning cells in a Grid</li>
+</ul>
+
+<hr />
+
+<h2 id="css-grid-layout-1">CSS Grid Layout</h2>
+
+<p>With <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout">CSS Grid Layout</a>, you can
+position HTML elements in a grid structure, reposition individual elements, stretch items across
+multiple cells and much more. It’s a very powerful layout tool.</p>
+
+<p>Working with CSS Grid Layout contains two major parts:</p>
+
+<ol>
+  <li>Defining the layout on a container element</li>
+  <li>Positioning the children on the grid cells</li>
+</ol>
+
+<h2 id="grid-container">Grid container</h2>
+
+<p>Just like CSS flexbox, the display mode is defined on a container element that contains all the
+elements to be positioned as direct children in the grid.</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.container</span> <span class="p">{</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">grid</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The grid is defined by the number and size of it’s rows and columns. By default, the grid consists
+of one column. The properties for defining the columns and rows are
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns">grid-template-columns</a> and
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-rows">grid-template-rows</a>. With the
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/gap">gap</a> property you can define a space between
+the grid cells.</p>
+
+<h3 id="fr-unit"><code class="language-plaintext highlighter-rouge">fr</code> Unit</h3>
+
+<p>The grid layout has the fraction unit <code class="language-plaintext highlighter-rouge">fr</code> as a special sizing unit (next to <code class="language-plaintext highlighter-rouge">px</code>, <code class="language-plaintext highlighter-rouge">rem</code> or <code class="language-plaintext highlighter-rouge">%</code>)</p>
+
+<ol>
+  <li>It splits the remaining space in a grid into equally sized fractions. The number of these parts
+is determined by the total amount of fraction units distributed in the row/column template.</li>
+  <li>The individual rows / columns take up the assigned number of fractions.</li>
+</ol>
+
+<p>In the following picture, the last two columns are sized with fraction units. The first of them has
+twice the width of the second one.</p>
+
+<p><img src="./grid-layout.png" alt="grid-template" /></p>
+
+<h2 id="element-positioning">Element Positioning</h2>
+
+<p>After the grid is set up on the container element, its children are placed inside the grid cells
+from left to right, top to bottom. By default, the elements are stretched such that they take up all
+the available cell space.</p>
+
+<p><img src="./element-positioning-1.png" alt="grid-template" /></p>
+
+<p>You can change an element’s positioning by using the the CSS properties
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column">grid-column</a>,
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-row">grid-rows</a> or
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-area">grid-area</a>, which combines the former
+into a single CSS shorthand property. Elements can also be stretched over multiple cells.</p>
+
+<p>Each element can be positioned on the columns and rows by using these values:</p>
+
+<ol>
+  <li><strong>Column / row index</strong> (see picture above).</li>
+  <li>Negative <strong>index</strong>. Indexing the lines from the other side.</li>
+  <li>The <strong><code class="language-plaintext highlighter-rouge">span</code></strong> value. Defines how many cells the item should stretch across.</li>
+</ol>
+
+<p>Here is an example:</p>
+
+<p><img src="./element-positioning-2.png" alt="grid-positioning" /></p>
+
+<blockquote>
+  <p>❗️ Positioning properties are set on the child elements, not on the container!</p>
+</blockquote>
+
+<h2 id="grid-template-areas"><code class="language-plaintext highlighter-rouge">grid-template-areas</code></h2>
+
+<p>A completely different approach to position elements inside a grid is to use <code class="language-plaintext highlighter-rouge">grid-template-areas</code>.</p>
+
+<ul>
+  <li>First the template cells are grouped into named areas. Every created cell is assigned an <strong>area
+name</strong>. Cells with the same name are grouped together to one area. This is done on the container
+element:
+    <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">grid-template-areas</span><span class="o">:</span>
+  <span class="s1">"a a b c"</span>
+  <span class="s1">"d d d c"</span>
+  <span class="s1">"e e e e"</span><span class="o">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Then the grid elements are assigned to one of these areas with the <code class="language-plaintext highlighter-rouge">grid-area</code> property:
+    <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.element-a</span> <span class="p">{</span>
+	<span class="py">grid-area</span><span class="p">:</span> <span class="n">a</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.element-b</span> <span class="p">{</span>
+	<span class="py">grid-area</span><span class="p">:</span> <span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="o">...</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>This will result in the same layout as shown above.</p>
+
+<blockquote>
+  <p>❗️ Make sure that the named areas are geometrically possible in the defined grid, otherwise your
+grid won’t work.</p>
+</blockquote>
+
+<h2 id="column-and-row-alignment">Column and Row Alignment</h2>
+
+<p>The combined size of the grid columns/rows you defined might be less than a given height/width of
+the grid container. In this case you can distribute the columns or rows inside the grid container.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Effect</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content">justify-content</a></td>
+      <td>Sets the alignment of the <code class="language-plaintext highlighter-rouge">columns</code>.</td>
+    </tr>
+    <tr>
+      <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-content">align-content</a></td>
+      <td>Sets the alignment of the <code class="language-plaintext highlighter-rouge">rows</code>.</td>
+    </tr>
+    <tr>
+      <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/place-content">place-content</a></td>
+      <td>Sets the alignment of the <code class="language-plaintext highlighter-rouge">rows</code> and <code class="language-plaintext highlighter-rouge">columns</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="cell-alignment">Cell Alignment</h2>
+
+<p>The position of the elements <em>inside</em> their cells can be specified on the grid container.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Effect</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/justify-items">justify-items</a></td>
+      <td>Sets the <code class="language-plaintext highlighter-rouge">horizontal</code> alignment.</td>
+    </tr>
+    <tr>
+      <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-items">align-items</a></td>
+      <td>Sets the <code class="language-plaintext highlighter-rouge">vertical</code> alignment.</td>
+    </tr>
+    <tr>
+      <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/place-items">place-items</a></td>
+      <td>Sets the <code class="language-plaintext highlighter-rouge">vertical</code> and <code class="language-plaintext highlighter-rouge">horizontal</code> alignment.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="resources">Resources</h2>
+
+<ul>
+  <li><a href="https://css-tricks.com/snippets/css/complete-guide-grid/">Complete Guide to CSS Grid</a></li>
+</ul>
+
+    </main>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll("a[href^='http']").forEach(function (link) {
+          // Nur externe Links, nicht gleiche Domain
+          if (!link.href.includes(window.location.hostname)) {
+            link.setAttribute("target", "_blank");
+            link.setAttribute("rel", "noopener noreferrer");
+          }
+        });
+
+        document
+          .querySelectorAll("div[class*='language-bash']")
+          .forEach((div) => {
+            const code = div.querySelector("code");
+            const btn = document.createElement("button");
+            btn.textContent = "copy";
+            btn.addEventListener("click", (event) => {
+              navigator.clipboard.writeText(code.firstChild.data);
+              event.target.textContent = "copied!";
+              setTimeout(() => {
+                event.target.textContent = "copy";
+              }, 2000);
+            });
+            code.append(btn);
+          });
+      });
+    </script>
+  </body>
+</html>
+

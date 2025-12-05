@@ -1,0 +1,312 @@
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Structure</title>
+     
+    <!-- Theme CSS laden -->
+    <link
+      rel="stylesheet"
+      href="/web-curriculum/assets/css/style.css?v=67261d04a37b9cc2aeb2482d3d2e133abfa7faa5"
+    />
+    <style>
+      main {
+        padding: 1em;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      li {
+        margin-left: 1.2em;
+      }
+      pre {
+        margin-bottom: 1.5em;
+      }
+      code,
+      pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        overflow-wrap: anywhere;
+        display: block;
+        position: relative;
+        padding: 1em 4em 1em 1em;
+      }
+      code[class*="language-plaintext"] {
+        display: inline-block;
+        padding: 3px;
+        background-color: #eeeeee;
+        border-radius: 6px;
+      }
+      button {
+        cursor: pointer;
+        font-size: 0.8em;
+        border-radius: 6px;
+        border: 1px solid black;
+        position: absolute;
+        top: 12px;
+        right: 12px;
+      }
+      h2 {
+        margin-top: 0.8em;
+        margin-bottom: 0.8em;
+      }
+      img {
+        width: 100%;
+      }
+      td {
+        border: 1px solid #ddddde;
+        padding: 2px;
+      }
+      table {
+        margin-bottom: 1em;
+      }
+      .download {
+        display: inline-block;
+        padding: 0.5em 1em;
+        background-color: #4f46e5;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.2s;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <!-- Hauptinhalt -->
+      <h1 id="css-structure">CSS Structure</h1>
+
+<h2 id="learning-objectives">Learning Objectives</h2>
+
+<ul>
+  <li>Understanding how the browser decides which CSS property to use when there are conflicting rules,
+regarding CSS cascade and CSS specificity</li>
+  <li>Structuring CSS to improve maintainability and readability</li>
+  <li>Organizing and naming CSS classes with BEM method</li>
+  <li>Creating and reusing Custom CSS properties, also called CSS variables</li>
+</ul>
+
+<hr />
+
+<h2 id="css-cascade">CSS Cascade</h2>
+
+<p>The cascade is the algorithm that defines which CSS rules are being applied when there are
+conflicting rules.</p>
+
+<p>When styling an element the browser:</p>
+
+<ol>
+  <li>Searches for all rules with matching selectors</li>
+  <li>Sorts the rules by their importance taking into account:
+    <ul>
+      <li>Whether the declaration is followed by <strong>!important</strong></li>
+      <li>The rule’s origin (Browser stylesheet, User stylesheet, Author stylesheet)</li>
+    </ul>
+  </li>
+  <li>Sorts rules by their <a href="#specificity">specificity</a>, if there are multiple rules with the same
+importance according to no. 2.</li>
+  <li>Chooses the last declaration over previous ones, if there are multiple rules with the same
+importance and the same specificity.</li>
+</ol>
+
+<p>You can read about the details in the
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Cascade">CSS Cascade mdn docs</a>.</p>
+
+<blockquote>
+  <p>❗️ We recommend never using !important unless you absolutely have to. It is almost impossible to
+overwrite a CSS rule with !important.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="specificity">Specificity</h2>
+
+<p>The specificity of a CSS selector tells the browser which rule is most relevant for an element. The
+more specific rules win over less specific ones.</p>
+
+<p>You can find a list of the specificity of different selectors on
+<a href="https://specifishity.com/">specifishity.com</a>.</p>
+
+<p>The <strong>universal selector</strong> is the lease specific one. It is overwritten by any other CSS rule with
+any other matching CSS selector.</p>
+
+<p><strong>type selectors</strong> like <code class="language-plaintext highlighter-rouge">div</code> have a low specificity and can easily be overwritten.</p>
+
+<p><strong>class selectors</strong> like <code class="language-plaintext highlighter-rouge">.bright</code> and <strong>attribute selectors</strong> like <code class="language-plaintext highlighter-rouge">[type=checkbox]</code> have a higher
+specificity.</p>
+
+<hr />
+
+<h2 id="css-structure-best-practices">CSS Structure best practices</h2>
+
+<ul>
+  <li>keep your CSS consistent throughout a project. In collaborative projects, there are often coding
+style guidelines.</li>
+  <li>separate global and local styles into different files (or sections of files)</li>
+  <li>create multiple stylesheets for different parts of your application
+    <ul>
+      <li>structure your code by thinking in reusable <strong>components</strong>. You can write your CSS for every
+component in its own CSS file.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="how-to-import-one-stylesheet-or-multiple-stylesheets-into-another-stylesheet">How to import one stylesheet or multiple stylesheets into another stylesheet</h3>
+
+<p>You can import one stylesheet into another stylesheet using <strong>@import</strong>:</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">@import</span> <span class="s1">"customer-card.css"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="css-practical-strategies">CSS practical strategies</h2>
+
+<p>There is no single strategy to approach HTML and CSS cooperation, since it mostly depends on the website / application size and target.</p>
+
+<p>Here we present some concrete scenarios.</p>
+
+<h3 id="highlight-a-product-in-offer">Highlight a product in offer</h3>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;article</span> <span class="na">class=</span><span class="s">"product"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h2&gt;</span>Amazing Article<span class="nt">&lt;/h2&gt;</span>
+  <span class="nt">&lt;span&gt;</span>Price: 66<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/article&gt;</span>
+<span class="nt">&lt;article</span> <span class="na">class=</span><span class="s">"product product-in-offer"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h2&gt;</span>Intrepid Item<span class="nt">&lt;/h2&gt;</span>
+  <span class="nt">&lt;span&gt;</span>Price: 99<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/article&gt;</span>
+<span class="nt">&lt;article</span> <span class="na">class=</span><span class="s">"product"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h2&gt;</span>Pretty Product<span class="nt">&lt;/h2&gt;</span>
+  <span class="nt">&lt;span&gt;</span>Price: 54<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/article&gt;</span>
+</code></pre></div></div>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.product</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="no">yellow</span><span class="p">;</span>
+  <span class="nl">padding</span><span class="p">:</span> <span class="m">1rem</span><span class="p">;</span>
+  <span class="nl">border-radius</span><span class="p">:</span> <span class="m">0.5rem</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.product-in-offer</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="no">orange</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="bem">BEM</h3>
+
+<p>Among the various naming conventions, a popular one is <a href="http://getbem.com/introduction/">BEM</a>. It suggests the concept of blocks, elements and modifiers like:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;article</span> <span class="na">class=</span><span class="s">"product"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h2</span> <span class="na">class=</span><span class="s">"product__title"</span><span class="nt">&gt;</span>Amazing Article<span class="nt">&lt;/h2&gt;</span>
+  <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"product__price"</span><span class="nt">&gt;</span>Price: 66<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/article&gt;</span>
+<span class="nt">&lt;article</span> <span class="na">class=</span><span class="s">"product product--in-offer"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h2</span> <span class="na">class=</span><span class="s">"product__title"</span><span class="nt">&gt;</span>Intrepid Item<span class="nt">&lt;/h2&gt;</span>
+  <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"product__price"</span><span class="nt">&gt;</span>Price: 99<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/article&gt;</span>
+<span class="nt">&lt;article</span> <span class="na">class=</span><span class="s">"product"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h2</span> <span class="na">class=</span><span class="s">"product__title"</span><span class="nt">&gt;</span>Pretty Product<span class="nt">&lt;/h2&gt;</span>
+  <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"product__price"</span><span class="nt">&gt;</span>Price: 54<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/article&gt;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>the <code class="language-plaintext highlighter-rouge">&lt;article&gt;</code> is a <strong>block</strong>;</li>
+  <li>the <code class="language-plaintext highlighter-rouge">&lt;h2&gt;</code> and <code class="language-plaintext highlighter-rouge">&lt;span&gt;</code> are <strong>elements</strong> contained in the block, and are named like <code class="language-plaintext highlighter-rouge">{block}__{elementName}</code>;</li>
+  <li>the second <code class="language-plaintext highlighter-rouge">&lt;article&gt;</code> is displayed in a different way thanks to the <code class="language-plaintext highlighter-rouge">product--in-offer</code> modifier class, that is named like <code class="language-plaintext highlighter-rouge">{block}--{modifierName}</code>.</li>
+</ul>
+
+<p>You are not required to use BEM, but you may encounter it in some challenges or examples.</p>
+
+<h3 id="kebab-case-naming-convention">Kebab Case naming convention</h3>
+
+<p>The kebab case naming convention defines to use hyphens to separate words in variables. Many
+developers use the kebab case convention to write css classes. In BEM we also use kebab case, for
+example:</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.customer-card</span> <span class="p">{</span>
+  <span class="err">...;</span>
+<span class="p">}</span>
+
+<span class="nc">.customer-card__button</span> <span class="p">{</span>
+  <span class="err">...;</span>
+<span class="p">}</span>
+
+<span class="nc">.customer-card--disabled</span> <span class="p">{</span>
+  <span class="err">...;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="custom-properties-css-variables">Custom properties (CSS variables)</h2>
+
+<p>You can store values in custom properties, so you can use them again multiple times without having
+to write the value.</p>
+
+<p>A common practice is to define variables in the <code class="language-plaintext highlighter-rouge">:root</code> pseudo class selector as follows:</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">:root</span> <span class="p">{</span>
+  <span class="py">--primary-color</span><span class="p">:</span> <span class="m">#ff00ff</span><span class="p">;</span>
+  <span class="py">--secondary-color</span><span class="p">:</span> <span class="m">#f00f0f</span><span class="p">;</span>
+
+  <span class="py">--rounded-sm</span><span class="p">:</span> <span class="m">5px</span><span class="p">;</span>
+  <span class="py">--rounded-lg</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>❗️ Custom properties have to be prefixed with <code class="language-plaintext highlighter-rouge">--</code></p>
+</blockquote>
+
+<p>You can use the custom properties as follows:</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.customer-card</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--primary-color</span><span class="p">);</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="n">--secondary-color</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="resources">Resources</h2>
+
+<ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Cascade">MDN docs: CSS Cascade</a></li>
+  <li><a href="https://specifishity.com/">specifishity.com</a></li>
+</ul>
+
+
+    </main>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll("a[href^='http']").forEach(function (link) {
+          // Nur externe Links, nicht gleiche Domain
+          if (!link.href.includes(window.location.hostname)) {
+            link.setAttribute("target", "_blank");
+            link.setAttribute("rel", "noopener noreferrer");
+          }
+        });
+
+        document
+          .querySelectorAll("div[class*='language-bash']")
+          .forEach((div) => {
+            const code = div.querySelector("code");
+            const btn = document.createElement("button");
+            btn.textContent = "copy";
+            btn.addEventListener("click", (event) => {
+              navigator.clipboard.writeText(code.firstChild.data);
+              event.target.textContent = "copied!";
+              setTimeout(() => {
+                event.target.textContent = "copy";
+              }, 2000);
+            });
+            code.append(btn);
+          });
+      });
+    </script>
+  </body>
+</html>
+
